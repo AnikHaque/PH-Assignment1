@@ -33,7 +33,7 @@ class Person {
     this.age = age;
   }
   getDetails() {
-    return `'Name: '${this.name}, Age: ${this.age}'`;
+    return `'Name: ${this.name}, Age: ${this.age}'`;
   }
 }
 
@@ -72,37 +72,39 @@ function printBookDetails(book: Book): void {
   );
 }
 
-function getUniqueValues<X, Y>(array1: X[], array2: Y[]): (X | Y)[] {
-  const result: (X | Y)[] = [];
-  let resultIndex = 0;
-
-  const newArray: (X | Y)[] = [];
-  let newArrayIndex = 0;
+function getUniqueValues<T extends string | number>(
+  array1: T[],
+  array2: T[]
+): T[] {
+  const result: T[] = [];
 
   for (let i = 0; i < array1.length; i++) {
-    newArray[newArrayIndex] = array1[i];
-    newArrayIndex++;
-  }
-  for (let i = 0; i < array2.length; i++) {
-    newArray[newArrayIndex] = array2[i];
-    newArrayIndex++;
-  }
-
-  for (let i = 0; i < newArray.length; i++) {
-    let isExist = false;
-    for (let j = 0; j < resultIndex; j++) {
-      if (newArray[i] === result[j]) {
-        isExist = true;
+    const value = array1[i]!; 
+    let exists = false;
+    for (let j = 0; j < result.length; j++) {
+      if (value === result[j]) {
+        exists = true;
+        break;
       }
     }
-    if (!isExist) {
-      result[resultIndex] = newArray[i];
-      resultIndex++;
+    if (!exists) result.push(value);
+  }
+
+  for (let i = 0; i < array2.length; i++) {
+    const value = array2[i]!; 
+    let exists = false;
+    for (let j = 0; j < result.length; j++) {
+      if (value === result[j]) {
+        exists = true;
+        break;
+      }
     }
+    if (!exists) result.push(value);
   }
 
   return result;
 }
+
 
 interface IProducts {
   name: string;
