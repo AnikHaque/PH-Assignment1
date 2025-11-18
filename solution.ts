@@ -72,38 +72,52 @@ function printBookDetails(book: Book): void {
   );
 }
 
+
 function getUniqueValues<T extends string | number>(
   array1: T[],
   array2: T[]
 ): T[] {
   const result: T[] = [];
+  let resultIndex = 0;
 
   for (let i = 0; i < array1.length; i++) {
-    const value = array1[i]!; 
+    const value: T = array1[i]!; 
     let exists = false;
-    for (let j = 0; j < result.length; j++) {
-      if (value === result[j]) {
+
+    for (let j = 0; j < resultIndex; j++) {
+      if (result[j] === value) {
         exists = true;
         break;
       }
     }
-    if (!exists) result.push(value);
+
+    if (!exists) {
+      result[resultIndex] = value;
+      resultIndex++;
+    }
   }
 
   for (let i = 0; i < array2.length; i++) {
-    const value = array2[i]!; 
+    const value: T = array2[i]!; 
     let exists = false;
-    for (let j = 0; j < result.length; j++) {
-      if (value === result[j]) {
+
+    for (let j = 0; j < resultIndex; j++) {
+      if (result[j] === value) {
         exists = true;
         break;
       }
     }
-    if (!exists) result.push(value);
+
+    if (!exists) {
+      result[resultIndex] = value;
+      resultIndex++;
+    }
   }
 
   return result;
 }
+
+
 
 
 interface IProducts {
