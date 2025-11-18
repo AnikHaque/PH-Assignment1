@@ -30,7 +30,7 @@ type UserKeys = keyof User;
 
 
 
-<h1> Union & Intersection Types (TypeScript)</h1>
+<h1>  Provide an example of using union and intersection types in TypeScript.  </h1>
 
 <p>
   TypeScript-এ আমরা মাঝে মাঝে এমন টাইপ চাই যেখানে 
